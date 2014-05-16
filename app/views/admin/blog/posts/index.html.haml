@@ -17,7 +17,7 @@
       %td.main
         = link_to post.title, edit_admin_blog_post_path(@site, @blog, post)
         .item-meta
-          = post.excerpt
+          = truncate_html(post.content, length: 240)
       %td
         = post.author
       %td
