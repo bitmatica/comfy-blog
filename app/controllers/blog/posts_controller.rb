@@ -50,4 +50,8 @@ class Blog::PostsController < Blog::BaseController
     render :cms_page => '/404', :status => 404
   end
 
+  def archive
+    @posts_by_month = @blog.posts.published.group_by { |p| p.published_at.beginning_of_month }.sort.reverse
+  end
+
 end
