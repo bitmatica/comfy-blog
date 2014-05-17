@@ -1,4 +1,6 @@
 class Blog::PostsController < Blog::BaseController
+
+  before_action :get_months
   
   skip_before_action :load_blog, :only => [:serve]
   
@@ -54,4 +56,10 @@ class Blog::PostsController < Blog::BaseController
     @posts_by_month = @blog.posts.published.group_by { |p| p.published_at.beginning_of_month }.sort.reverse
   end
 
+protected
+
+  def get_months
+    load_blog
+    @months = @blog.posts.published.map { |p| p.published_at.beginning_of_month }.uniq.sort.reverse
+  end
 end
