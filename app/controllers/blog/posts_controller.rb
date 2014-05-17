@@ -13,6 +13,7 @@ class Blog::PostsController < Blog::BaseController
     end
     
     load_blog
+    get_months # Not sure if necessary, but doesn't hurt
     
     if params[:slug].present?
       show && render(:show)
@@ -60,6 +61,8 @@ protected
 
   def get_months
     load_blog
-    @months = @blog.posts.published.map { |p| p.published_at.beginning_of_month }.uniq.sort.reverse
+    if @months.nil?
+      @months = @blog.posts.published.map { |p| p.published_at.beginning_of_month }.uniq.sort.reverse
+    end
   end
 end
