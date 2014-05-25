@@ -23,11 +23,16 @@ class Blog::PostsController < Blog::BaseController
   end
 
   def index
-    scope = if params[:year]
+    if params[:year]
+      @header = "Blog posts from " + params[:year]
       scope = @blog.posts.published.for_year(params[:year])
-      params[:month] ? scope.for_month(params[:month]) : scope
+      if params[:month]
+        month = Date.new(params[:year].to_i, params[:month].to_i)
+        @header = "Blog posts from " + month.strftime("%B %Y")
+        scope = scope.for_month(params[:month]) 
+      end
     else
-      @blog.posts.published
+      scope = @blog.posts.published
     end
 
     limit = ComfyBlog.config.posts_per_page
