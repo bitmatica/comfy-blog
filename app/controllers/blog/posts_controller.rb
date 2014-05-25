@@ -24,17 +24,19 @@ class Blog::PostsController < Blog::BaseController
 
   def index
     if params[:year]
-      @header = "Blog posts from " + params[:year]
+      @header = "Posts from " + params[:year]
       scope = @blog.posts.published.for_year(params[:year])
       if params[:month]
         month = Date.new(params[:year].to_i, params[:month].to_i)
-        @header = "Blog posts from " + month.strftime("%B %Y")
+        @header = "Posts from " + month.strftime("%B %Y")
         scope = scope.for_month(params[:month]) 
       end
     else
+      @header = "Welcome to the Bitmatica blog."
       scope = @blog.posts.published
     end
 
+    @page_title = "Bitmatica Blog: " + @header
     limit = ComfyBlog.config.posts_per_page
     respond_to do |format|
       format.html do
@@ -52,6 +54,7 @@ class Blog::PostsController < Blog::BaseController
     else
       @blog.posts.published.where(:slug => params[:slug]).first!
     end
+    @page_title = "Bitmatica Blog: " + @post.title
     @comment = @post.comments.new
 
   rescue ActiveRecord::RecordNotFound
@@ -60,6 +63,7 @@ class Blog::PostsController < Blog::BaseController
 
   def archive
     @posts_by_month = @blog.posts.published.group_by { |p| p.published_at.beginning_of_month }.sort.reverse
+    @page_title = "Bitmatica Blog: Archive"
   end
 
 protected
