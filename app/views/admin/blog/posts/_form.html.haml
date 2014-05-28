@@ -4,6 +4,8 @@
 = form.text_field :title, :data => {:slugify => @post.new_record?}
 = form.text_field :slug, :data => {:slug => true}
 = form.text_field :author
+= form.text_field :author_title
+= form.text_field :author_email
 = form.text_area :content, :data => {:rich_text => true}
 = form.text_field :published_at, :value => @post.published_at.try(:to_s, :db), :data => {:datetime => true}
 = form.check_box :is_published

@@ -1,3 +1,5 @@
+require 'digest/md5'
+
 class Blog::PostsController < Blog::BaseController
 
   before_action :get_months
@@ -56,6 +58,7 @@ class Blog::PostsController < Blog::BaseController
     end
     @page_title = "Bitmatica Blog: " + @post.title
     @comment = @post.comments.new
+    @hashed_author_email = Digest::MD5.hexdigest(@post.author_email)
 
   rescue ActiveRecord::RecordNotFound
     render :cms_page => '/404', :status => 404
