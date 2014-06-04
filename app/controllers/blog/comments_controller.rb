@@ -6,12 +6,12 @@ class Blog::CommentsController < Blog::BaseController
   def create
     @comment.save!
     
-    flash[:success] = 'Comment created'
-    redirect_to blog_post_path(@cms_site.path, @blog.path, @post.slug)
+    flash[:comment_success] = 'Thanks! Your comment will appear soon.'
+    redirect_to blog_post_path(@cms_site.path, @blog.path, @post.slug, anchor: "new-comment")
     
-  rescue ActiveRecord::RecordInvalid
-    flash[:error] = 'Failed to create Comment'
-    render 'blog/posts/show'
+  rescue ActiveRecord::RecordInvalid => e
+    flash[:comment_error] = "Sorry, we couldn't save your comment. " + e.to_s.lines.first.gsub("Validation failed: ", "") + "."
+    redirect_to blog_post_path(@cms_site.path, @blog.path, @post.slug, {anchor: "new-comment", author: @comment.author, email: @comment.email, content: @comment.content})
   end
 
 protected
