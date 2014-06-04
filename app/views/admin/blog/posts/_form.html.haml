@@ -6,6 +6,7 @@
 = form.text_field :author
 = form.text_field :author_title
 = form.text_field :author_email
+= form.text_field :image_url
 = form.text_area :content, :data => {:rich_text => true}
 = form.text_field :published_at, :value => @post.published_at.try(:to_s, :db), :data => {:datetime => true}
 = form.check_box :is_published
