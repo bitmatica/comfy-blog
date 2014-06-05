@@ -1,10 +1,11 @@
-# ComfyBlog 
-[![Gem Version](https://badge.fury.io/rb/comfy_blog.png)](http://rubygems.org/gems/comfy_blog) [![Build Status](https://secure.travis-ci.org/comfy/comfy-blog.png)](http://travis-ci.org/comfy/comfy-blog) [![Dependency Status](https://gemnasium.com/comfy/comfy-blog.png)](https://gemnasium.com/comfy/comfy-blog) [![Code Climate](https://codeclimate.com/github/comfy/comfy-blog.png)](https://codeclimate.com/github/comfy/comfy-blog) [![Coverage Status](https://coveralls.io/repos/comfy/comfy-blog/badge.png?branch=master)](https://coveralls.io/r/comfy/comfy-blog)
+# Bitmatica's ComfyBlog 
 
 ComfyBlog is an simple blog management engine for [ComfortableMexicanSofa](https://github.com/comfy/comfortable-mexican-sofa) (for version >= 1.11).
 
-## Features
+This version of ComfyBlog has been customized specifically for use on the [Bitmatica Blog](http://www.bitmatica.com/blog). The changes made here are not intended to move upstream and are not expected to be useful for anyone else.
 
+## Features
+ 
 * Ability to set up multiple blogs per site
 * User defined layout per blog
 

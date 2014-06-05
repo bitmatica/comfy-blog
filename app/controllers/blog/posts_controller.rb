@@ -57,8 +57,8 @@ class Blog::PostsController < Blog::BaseController
       @blog.posts.published.where(:slug => params[:slug]).first!
     end
     @page_title = "Bitmatica Blog: " + @post.title
-    @comment = @post.comments.new
-    @hashed_author_email = Digest::MD5.hexdigest(@post.author_email)
+    @comment = @post.comments.new(author: params[:author], email: params[:email], content: params[:content])
+    @hashed_author_email = Digest::MD5.hexdigest(@post.author_email || "")
 
   rescue ActiveRecord::RecordNotFound
     render :cms_page => '/404', :status => 404
